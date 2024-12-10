@@ -6,37 +6,97 @@
     <title>Card</title>
     <style>
       body {
-        font-family: Georgia, "Times New Roman", Times, serif;
+        font-family: Arial, Helvetica, sans-serif;
         height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #3ba9c0b9;
+        background-color: #0f4556b9;
         margin: 0;
       }
-      .container {
-        border: 4px solid #fff;
+
+      @property --angle {
+        syntax: "<angle>";
+        initial-value: 0deg;
+        inherits: false;
+      }
+
+      .card {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .card::after, .card::before {
+        width: 80px;
+        height: 182px;
+        padding: 90px 80px 90px 80px;
         border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        content: "";
+        background: red;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        z-index: -1;
+        background-image: conic-gradient(from var(--angle),transparent 70%,blue);
+        animation: 1s spin linear infinite;
+      }
+
+      .card::before {
+        filter: blur(1.5rem);
+        opacity: 0.5;
+      }
+      @keyframes spin {
+        from{
+          --angle: 0deg;
+        }
+        to{
+          --angle:360deg;
+        }
+      }
+
+      .container {
         width: 250px;
         max-width: 90%;
         height: auto;
+        border: 2px solid #1da0b5;
+        border-radius: 10px;
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 8px rgba(17, 16, 16, 0.2);
+        position: relative;
+      }
+      .container:hover {
+        transform: scale(1.2);
+        transition: ease-out 0.4s;
       }
       .image-container {
         width: 100%;
         height: 200px;
         overflow: hidden;
       }
+      .image-container:hover{
+        transform: scale(1.1);
+        transform-style: flat;
+        transition: ease-in-out 0.4s;
+      }
       #img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 10px 10px 0 0;
+        border-radius: none;
+      }
+      #img:hover{
+        box-shadow: #333;
       }
       .content {
+        border-top: #1da0b5 2px solid;
         background-color: #fff;
         padding: 15px;
         display: flex;
@@ -46,21 +106,35 @@
       h1 {
         font-size: 1.5rem;
         margin: 0 0 10px;
-        color: #333;
+        color: #1da0b5;
+      }
+      h1:hover{
+        color: #0f4556b9;
+        transform: scale(1.1);
+        transform-style: flat;
+        transition: ease-out 0.2s;
       }
       p {
         font-size: 0.9rem;
         color: #555;
         line-height: 1.4;
         margin: 0;
+        color: #1da0b5;
+      }
+      p:hover{
+        transform: scale(1.1);      
+        transform-style: flat;
+        transition: ease-in-out 0.4s;
+        color: #0f4556b9;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="image-container">
+    <div class="card">
+      <div class="container">
+        <div class="image-container">
         <img
-          src="./wp9392330-nature-4k-portrait-wallpapers.jpg"
+          src="https://images.hdqwalls.com/wallpapers/soft-lace-and-deep-blue-eyes-j2.jpg"
           alt="A serene nature landscape with mountains and a clear sky."
           id="img"
           title="Card"
@@ -69,11 +143,14 @@
       <div class="content">
         <h1>Card</h1>
         <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas,
-          mollitia? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
           Non unde at fugiat neque illo libero iste ipsum a id.
         </p>
       </div>
     </div>
+
+
+    </div>
+    
   </body>
 </html>
